@@ -7,6 +7,7 @@ import { Form } from "./components/Form";
 import { Input } from "./components/Input";
 import { PrimaryButton } from "./components/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers";
+import { useData } from "./DataContext";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -18,10 +19,12 @@ const schema = yup.object().shape({
     .string()
     .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
     .required("Last name is a required field"),
-});  
+});
 
 export const Step1 = () => {
+  const { setValues, data } = useData();
   const { register, handleSubmit, errors } = useForm({
+    defaultValues: { firstName: data.firstName, lastName: data.lastName },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -30,6 +33,7 @@ export const Step1 = () => {
 
   const onSubmit = (data) => {
     history.push("./step2");
+    setValues(data);
   };
 
   return (
@@ -37,7 +41,7 @@ export const Step1 = () => {
       <Typography component="h2" variant="h5">
         🦄 Step 1
       </Typography>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           ref={register}
           name="firstName"

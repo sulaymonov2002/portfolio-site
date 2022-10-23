@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     .string()
     .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
     .required("Last name is a required field"),
-});
+});  
 
 export const Step1 = () => {
   const { register, handleSubmit, errors } = useForm({

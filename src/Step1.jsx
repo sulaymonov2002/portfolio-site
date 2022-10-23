@@ -1,11 +1,11 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+import { useForm } from "react-hook-form";
 import { MainContainer } from "./components/MainContainer";
 import { Form } from "./components/Form";
 import { Input } from "./components/Input";
 import { PrimaryButton } from "./components/PrimaryButton";
-import Typography from "@material-ui/core/Typography";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
 
@@ -54,7 +54,7 @@ export const Step1 = () => {
           errors={!!errors.lastName}
           helperText={errors?.lastName?.message}
         />
-        <PrimaryButton type="submit">Next</PrimaryButton>
+        <PrimaryButton>Next</PrimaryButton>
       </Form>
     </MainContainer>
   );

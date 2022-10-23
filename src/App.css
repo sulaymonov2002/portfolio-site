@@ -11,3 +11,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New" monospace;
 }
+
+h1 {
+  font-family: "Permanent Marker", sans-serif;
+  text-align: center;
+  margin-bottom: -40px;
+  font-size: 40px;
+  color: deeppink;
+  text-shadow: 1px 1px darkmagenta;
+}

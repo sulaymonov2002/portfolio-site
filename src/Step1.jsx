@@ -1,13 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useData } from "./DataContext";
 import Typography from "@material-ui/core/Typography";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
+import { PrimaryButton } from "./components/PrimaryButton";
 import { MainContainer } from "./components/MainContainer";
 import { Form } from "./components/Form";
 import { Input } from "./components/Input";
-import { PrimaryButton } from "./components/PrimaryButton";
-import { yupResolver } from "@hookform/resolvers";
-import { useData } from "./DataContext";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -23,13 +23,12 @@ const schema = yup.object().shape({
 
 export const Step1 = () => {
   const { setValues, data } = useData();
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
     defaultValues: { firstName: data.firstName, lastName: data.lastName },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-
-  const history = useHistory();
 
   const onSubmit = (data) => {
     history.push("./step2");
@@ -43,19 +42,21 @@ export const Step1 = () => {
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          ref={register}
-          name="firstName"
+          {...register("parentName")}
+          id="firstName"
           type="text"
           label="First Name"
-          errors={!!errors.firstName}
+          name="firstName"
+          error={!!errors.firstName}
           helperText={errors?.firstName?.message}
         />
         <Input
           ref={register}
-          name="lastName"
+          id="lastName"
           type="text"
           label="Last Name"
-          errors={!!errors.lastName}
+          name="lastName"
+          error={!!errors.lastName}
           helperText={errors?.lastName?.message}
         />
         <PrimaryButton>Next</PrimaryButton>
